@@ -66,7 +66,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(tags__slug__in=tags).distinct()
         if self.request.user.is_authenticated:
             return queryset.annotate(
-                # favorite=Exists(
                 favored=Exists(
                     queryset.filter(
                         favorite__user=self.request.user,
