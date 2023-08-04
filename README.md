@@ -48,8 +48,8 @@ http://localhost/api/docs/
 ```
 
 ## stack
-1. Python
-2. Django
+1. Python 3.9.10
+2. Django 4.2.3
 3. DRF
 4. JWT + Djoser
 5. NGinx

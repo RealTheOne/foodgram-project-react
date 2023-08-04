@@ -2,6 +2,7 @@ import csv
 
 from django.core.management.base import BaseCommand
 
+from foodgram.settings import POS_ONE, POS_ZERO
 from recipes.models import Ingredient
 
 
@@ -17,8 +18,8 @@ class Command(BaseCommand):
             for row in csv_reader:
                 try:
                     create_ingredients = Ingredient(
-                        name=row[0],
-                        measurement_unit=row[1],
+                        name=row[POS_ZERO],
+                        measurement_unit=row[POS_ONE],
                     )
                     ingredients.append(create_ingredients)
                 except ValueError:

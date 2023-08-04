@@ -3,6 +3,7 @@ from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
+from foodgram.settings import RECIPE_MAX_LENGTH
 from recipes.models import Follow, Ingredient, Recipe, RecipeIngredient, Tag
 from users.models import User
 
@@ -126,7 +127,7 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         name = data.get('name')
-        if len(name) > 200:
+        if len(name) > RECIPE_MAX_LENGTH:
             raise serializers.ValidationError(
                 'Recipe name is more than 200 symbols.'
             )
@@ -157,15 +158,13 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         return data
 
     def create_ingredients(self, recipe, ingredients):
-        ingredients_list = []
         for ingredient in ingredients:
-            create_ingredients = RecipeIngredient(
-                recipe=recipe,
-                ingredient_id=ingredient.get('id'),
-                amount=ingredient.get('amount'),
-            )
-            ingredients_list.append(create_ingredients)
-        RecipeIngredient.objects.bulk_create(ingredients_list)
+            RecipeIngredient.objects.bulk_create([
+                RecipeIngredient(
+                    recipe=recipe,
+                    ingredient_id=ingredient.get('id'),
+                    amount=ingredient.get('amount'),)
+            ])
 
     def create(self, validated_data):
         ingredients = validated_data.pop('ingredients')

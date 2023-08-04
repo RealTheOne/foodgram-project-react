@@ -152,3 +152,19 @@ DJOSER = {
         "current_user": "api.serializers.CustomUserSerializer",
     },
 }
+
+RECIPE_MAX_LENGTH = 200
+POS_ZERO = 0
+POS_ONE = 1
+POS_TWO = 2
+HEAD_FONT = 22
+HEAD_RIGHT = 20
+HEAD_UP = 800
+MAIN_FONT = 14
+MAIN_RIGHT = 40
+HEIGHT_MAIN = 770
+FOOT_FONT = 16
+FOOT_RIGHT = 300
+FOOT_UP = 30
+HEIGHT_CROP = 30
+FONT_COLOR = 0.25

@@ -7,6 +7,11 @@ from reportlab.pdfgen import canvas
 from rest_framework import status
 from rest_framework.response import Response
 
+from foodgram.settings import (FONT_COLOR, FOOT_FONT, FOOT_RIGHT, FOOT_UP,
+                               HEAD_FONT, HEAD_RIGHT, HEAD_UP, HEIGHT_CROP,
+                               HEIGHT_MAIN, MAIN_FONT, MAIN_RIGHT, POS_ONE,
+                               POS_TWO, POS_ZERO)
+
 
 def post(request, pk, get_object, models, serializer):
     """Post."""
@@ -26,9 +31,7 @@ def post(request, pk, get_object, models, serializer):
     models.objects.create(
         recipe=obj, user=request.user
     )
-    return Response(
-        serializer.data, status=status.HTTP_201_CREATED
-    )
+    return serializer.data
 
 
 def delete(request, pk, get_object, models):
@@ -56,29 +59,29 @@ def make_shopping_cart(ingredients):
     pdfmetrics.registerFont(
         TTFont('verdana', 'fonts/Verdana.ttf', 'UTF-8'))
     for ingredient in ingredients:
-        if ingredient[0] not in grocery_list:
-            grocery_list[ingredient[0]] = {
-                'measurement_unit': ingredient[1],
-                'amount': ingredient[2]
+        if ingredient[POS_ZERO] not in grocery_list:
+            grocery_list[ingredient[POS_ZERO]] = {
+                'measurement_unit': ingredient[POS_ONE],
+                'amount': ingredient[POS_TWO]
             }
         else:
-            grocery_list[ingredient[0]]['amount'] += ingredient[2]
+            grocery_list[ingredient[POS_ZERO]]['amount'] += ingredient[POS_TWO]
     report = canvas.Canvas(download)
-    report.setFont('verdana', 22)
-    report.drawString(20, 800, 'My grocery list:')
-    height = 770
-    report.setFont('verdana', 14)
-    for i, (name, data) in enumerate(grocery_list.items(), 1):
-        report.drawString(40, height, (f'{i}. {name.capitalize()} - '
-                                       f'{data["amount"]} '
-                                       f'{data["measurement_unit"]}'))
-        height -= 30
-    report.setFont('verdana', 16)
-    report.setFillColorRGB(0.25, 0.25, 0.25)
+    report.setFont('verdana', HEAD_FONT)
+    report.drawString(HEAD_RIGHT, HEAD_UP, 'My grocery list:')
+    height = HEIGHT_MAIN
+    report.setFont('verdana', MAIN_FONT)
+    for i, (name, data) in enumerate(grocery_list.items(), POS_ONE):
+        report.drawString(MAIN_RIGHT, height, (f'{i}. {name.capitalize()} - '
+                                               f'{data["amount"]} '
+                                               f'{data["measurement_unit"]}'))
+        height -= HEIGHT_CROP
+    report.setFont('verdana', FOOT_FONT)
+    report.setFillColorRGB(FONT_COLOR, FONT_COLOR, FONT_COLOR)
     report.drawCentredString(
-        300, 30, 'Foodgram grocery assistant.'
+        FOOT_RIGHT, FOOT_UP, 'Foodgram grocery assistant.'
     )
     report.showPage()
     report.save()
-    download.seek(0)
+    download.seek(POS_ZERO)
     return download

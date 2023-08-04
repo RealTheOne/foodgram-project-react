@@ -8,23 +8,20 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from api.filters import IngredientSearchFilter
+from api.permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
+from api.serializers import (CustomUserSerializer, IngredientSerializer,
+                             RecipeCreateSerializer, RecipeListSerializer,
+                             SubscribeRecipeSerializer, SubscribeSerializer,
+                             SubscribeUserSerializer, TagSerializer)
+from api.utils import delete, make_shopping_cart, post
 from recipes.models import (FavoriteRecipe, Follow, Ingredient, Recipe,
                             RecipeIngredient, ShoppingCart, Tag)
 from users.models import User
 
-from .filters import IngredientSearchFilter
-from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
-from .serializers import (CustomUserSerializer, IngredientSerializer,
-                          RecipeCreateSerializer, RecipeListSerializer,
-                          SubscribeRecipeSerializer, SubscribeSerializer,
-                          SubscribeUserSerializer, TagSerializer)
-from .utils import delete, make_shopping_cart, post
-
 
 class ListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     """List viewset mixin."""
-
-    pass
 
 
 class CustomUserViewSet(views.UserViewSet):
@@ -96,10 +93,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     def favorite(self, request, pk=None):
         if request.method == 'POST':
-            return post(
+            data = post(
                 request, pk, Recipe,
                 FavoriteRecipe, SubscribeRecipeSerializer
             )
+            return Response(data, status=status.HTTP_201_CREATED)
         if request.method == 'DELETE':
             return delete(request, pk, Recipe, FavoriteRecipe)
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -111,10 +109,11 @@ class RecipeViewSet(viewsets.ModelViewSet):
     )
     def shopping_cart(self, request, pk=None):
         if request.method == 'POST':
-            return post(
+            data = post(
                 request, pk, Recipe,
                 ShoppingCart, SubscribeRecipeSerializer
             )
+            return Response(data, status=status.HTTP_201_CREATED)
         if request.method == 'DELETE':
             return delete(request, pk, Recipe, ShoppingCart)
         return Response(status=status.HTTP_400_BAD_REQUEST)
