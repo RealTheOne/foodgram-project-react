@@ -3,7 +3,7 @@ name: Foodgram-app workflow
 on:
     push:
         branches:
-            - main
+            - master
 
 jobs:
     tests:
@@ -55,7 +55,6 @@ jobs:
             with:
               host: ${{ secrets.HOST }}
               username: ${{ secrets.USER }}
-              password: ${{ secrets.PASSWORD }}
               key: ${{ secrets.SSH_KEY }}
               passphrase: ${{ secrets.SSH_PASSPHRASE }}
               script: |
