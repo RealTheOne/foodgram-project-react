@@ -153,7 +153,7 @@ DJOSER = {
     },
 }
 
-# Constants global
+# Constants
 
 RECIPE_MAX_LENGTH = 200
 POS_ZERO = 0
