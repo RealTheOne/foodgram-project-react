@@ -1,16 +1,15 @@
 import io
 
 from django.shortcuts import get_object_or_404
+from foodgram.settings import (FONT_COLOR, FOOT_FONT, FOOT_RIGHT, FOOT_UP,
+                               HEAD_FONT, HEAD_RIGHT, HEAD_UP, HEIGHT_CROP,
+                               HEIGHT_MAIN, MAIN_FONT, MAIN_RIGHT, POS_ONE,
+                               POS_TWO, POS_ZERO)
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from rest_framework import status
 from rest_framework.response import Response
-
-from foodgram.settings import (FONT_COLOR, FOOT_FONT, FOOT_RIGHT, FOOT_UP,
-                               HEAD_FONT, HEAD_RIGHT, HEAD_UP, HEIGHT_CROP,
-                               HEIGHT_MAIN, MAIN_FONT, MAIN_RIGHT, POS_ONE,
-                               POS_TWO, POS_ZERO)
 
 
 def post(request, pk, get_object, models, serializer):

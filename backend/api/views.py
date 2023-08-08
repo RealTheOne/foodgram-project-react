@@ -1,13 +1,3 @@
-from django.db.models import Exists, OuterRef
-from django.http import FileResponse
-from django.shortcuts import get_object_or_404
-from djoser import views
-from rest_framework import mixins, status, viewsets
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
 from api.filters import IngredientSearchFilter
 from api.permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
 from api.serializers import (CustomUserSerializer, IngredientSerializer,
@@ -15,8 +5,17 @@ from api.serializers import (CustomUserSerializer, IngredientSerializer,
                              SubscribeRecipeSerializer, SubscribeSerializer,
                              SubscribeUserSerializer, TagSerializer)
 from api.utils import delete, make_shopping_cart, post
+from django.db.models import Exists, OuterRef
+from django.http import FileResponse
+from django.shortcuts import get_object_or_404
+from djoser import views
 from recipes.models import (FavoriteRecipe, Follow, Ingredient, Recipe,
                             RecipeIngredient, ShoppingCart, Tag)
+from rest_framework import mixins, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from users.models import User
 
 

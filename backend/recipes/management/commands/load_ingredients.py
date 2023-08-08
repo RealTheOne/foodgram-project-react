@@ -1,7 +1,6 @@
 import csv
 
 from django.core.management.base import BaseCommand
-
 from foodgram.settings import POS_ONE, POS_ZERO
 from recipes.models import Ingredient
 
