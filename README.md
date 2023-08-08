@@ -21,7 +21,7 @@ DATABASES = {
 ```
 ### In /infra/ run a command (You should have Docker and Docker Compose installed):
 ```
-docker-compose up
+docker compose up
 ```
 ### In /backend/ install and activate local environment:
 ```
