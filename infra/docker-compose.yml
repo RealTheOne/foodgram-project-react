@@ -38,8 +38,8 @@ services:
       - static_value:/var/html/static/
       - media_value:/var/html/media/
     depends_on:
-      -backend
-      -frontend
+      - backend
+      - frontend
     restart:
       always
 
