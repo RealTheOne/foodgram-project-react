@@ -19,7 +19,8 @@ services:
     volumes:
       - static_value:/static
       - media_value:/app/media
-    depends_on: db
+    depends_on:
+      - db
     restart: always
 
   frontend:
