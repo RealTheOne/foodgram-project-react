@@ -1,7 +1,18 @@
-venv
 .git
-db.sqlite3
-static_backend
+
+# Media and static
+static
+media
+
+# Env
+venv
+.venv
+.env
+
+# IDE
 .idea
 .vscode
-.env
+
+# DBs
+**/migrations/
+db.sqlite3
