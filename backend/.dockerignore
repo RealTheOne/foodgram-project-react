@@ -14,5 +14,4 @@ venv
 .vscode
 
 # DBs
-**/migrations/
 db.sqlite3

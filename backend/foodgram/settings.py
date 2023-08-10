@@ -140,8 +140,8 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    'HIDE_USERS': False,
     'LOGIN_FIELD': 'email',
+    'HIDE_USERS': False,
     "PERMISSIONS": {
         "user": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
         "user_list": ["rest_framework.permissions.IsAuthenticatedOrReadOnly"],
@@ -153,7 +153,7 @@ DJOSER = {
     },
 }
 
-# Constants
+# Constants global
 
 RECIPE_MAX_LENGTH = 200
 POS_ZERO = 0
