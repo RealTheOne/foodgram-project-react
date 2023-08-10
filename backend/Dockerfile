@@ -13,4 +13,5 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . .
 
-CMD ["make", "run"]
+# CMD ["make", "run"]
+CMD ["gunicorn", "--bind", "0.0.0.0:7000", "foodgram.wsgi"]
