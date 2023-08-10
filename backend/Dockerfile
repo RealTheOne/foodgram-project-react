@@ -1,8 +1,11 @@
 FROM python:3.9
 
-WORKDIR /app
+# WORKDIR /app
+WORKDIR /foodgram
 
 RUN apt-get update && apt-get install -y make
+RUN pip install --upgrade pip
+RUN pip install gunicorn==21.2.0
 
 COPY requirements.txt ./
 
