@@ -36,7 +36,8 @@ services:
       - ${NGINX_PORT}:80
     volumes:
       - static_value:/static
-      - media_value:/app/media
+      # - media_value:/app/media
+      - media_value:/var/html/media/
     depends_on:
       - backend
       - frontend
