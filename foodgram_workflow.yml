@@ -43,7 +43,7 @@ jobs:
             with:
               context: ./backend/
               push: true
-              tags: realtheone/foodgram_backend:latest
+              tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
           - name: Push to Dockerhub nginx
             uses: docker/build-push-action@v4
             with:
@@ -79,5 +79,9 @@ jobs:
                 sudo docker compose pull
                 sudo docker compose down
                 sudo docker compose up -d
+                sudo docker compose exec backend python manage.py makemigrations
                 sudo docker compose exec backend python manage.py migrate
+                sudo docker compose exec backend python manage.py load_ingredients
+                sudo docker compose exec backend python manage.py collectstatic --no-input
+                sudo docker compose exec backend cp -r /foodgram/static/. /static/static/
                 sudo systemctl restart nginx
