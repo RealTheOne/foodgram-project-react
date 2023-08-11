@@ -18,7 +18,8 @@ services:
     env_file: .env
     volumes:
       - static_value:/static
-      - media_value:/app/media
+      # - media_value:/app/media
+      - media_value:/foodgram/media
     depends_on:
       - db
     restart: always
@@ -37,7 +38,8 @@ services:
     volumes:
       - static_value:/static
       # - media_value:/app/media
-      - media_value:/var/html/media/
+      # - media_value:/var/html/media/
+      - media_value:/foodgram/media
     depends_on:
       - backend
       - frontend
