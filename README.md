@@ -1,16 +1,7 @@
-# Educational project: Foodgram
+# Cooking helper / продуктовый помощник
 ## Description:
-Project foodgram-project-react is a graduate work for Python-developer course from Yandex-practicum.
-This project is a cooking helper. It allows you to make and share recipes, follow other authors.
+Project foodgram-project-react is a cooking helper. It allows you to make and share recipes, follow other authors.
 Make grocery lists out of recipes of your interest.
-
-## Admin access:
-### http://84.201.164.160:7000/admin/
-### login: a@a.ru
-### pass: xxx
-
-## Site access:
-### https://yapkittygramtask.dynv6.net (changing nginx settings is faster than getting a new domain name)
 
 ## How to run project in dev-mode locally
 ### Clone repository and access it through command line:
